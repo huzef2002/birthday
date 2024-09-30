@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Celebration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Gloria+Hallelujah&family=Lilita+One&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffcc00, #ff6699, #66ccff);
+            animation: gradientBG 5s infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            font-family: 'Great Vibes', cursive;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 4rem;
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shine {
+            0% { opacity: 0.5; text-shadow: 0px 0px 10px #ffcc00; }
+            50% { opacity: 1; text-shadow: 0px 0px 20px #ffffff; }
+            100% { opacity: 0.5; text-shadow: 0px 0px 10px #ff6699; }
+        }
+
+        .celebrate {
+            font-size: 2rem;           
+        }
+
+        @keyframes blink {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Fullscreen overlay for interaction */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .para{           
+        font-family: "Gloria Hallelujah", cursive;
+        font-weight: 400;
+        font-style: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- Interaction Overlay -->
+    <div id="overlay" class="overlay" onclick="startCelebration()">
+        Click to Start the Celebration!
+    </div>
+
+    <div class="container">
+        <h1 class="shine-text">Happy Birthday!</h1>
+        <h1>Mahek  Hadiya</h1>
+        <p class="celebrate mt-3">Wishing you a wonderful day filled with joy and love.</p>
+
+        <div>
+            <p class="para mt-5">make a spartal day for you</p>
+        </div>
+    </div>
+    <!-- Audio Element -->
+    <audio id="birthdaySong" src="happy-birthday-242244 (1).mp3"></audio>
+
+    <!-- Confetti.js Library (Include this library for confetti effect) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Script for Confetti and Audio Playback -->
+    <script>
+        // Function to start confetti animation
+        function startConfetti() {
+            const duration = 5 * 1000; // 5 seconds
+            const end = Date.now() + duration;
+
+            const colors = ['#bb0000', '#ffffff', '#00ff00', '#0000ff', '#ff6699', '#ffcc00'];
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // Function to play the birthday song
+        function playBirthdaySong() {
+            const song = document.getElementById("birthdaySong");
+            song.play();
+        }
+
+        // Function to start both confetti and the birthday song after interaction
+        function startCelebration() {
+            document.getElementById('overlay').style.display = 'none'; // Hide the overlay after the user clicks
+            startConfetti(); // Start confetti animation
+            playBirthdaySong(); // Play the birthday song
+        }
+    </script>
+</body>
+</html>
